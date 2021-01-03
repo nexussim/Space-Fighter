@@ -8,21 +8,21 @@ let enemyShips = [];
 let laserShots = [];
 let shipPositionX = shipPosition.x;
 let shipPositionY = shipPosition.y;
-let input_state;
+let input_state = {};
 let arrowKeyPressed;
 
 
 
 function gameloop() {
     requestAnimationFrame(gameloop); 
-        if (input_state === 'start' && arrowKeyPressed === 'ArrowRight' && shipPosition.x !== canvas.width - 20) {
+        if (input_state.ArrowRight && shipPosition.x !== canvas.width - 20) {
             shipPosition.x += 5;
-        } else if (input_state === 'start' && arrowKeyPressed === 'ArrowLeft' && shipPosition.x !== 0) {
+        } else if (input_state.ArrowLeft && shipPosition.x !== 0) {
             shipPosition.x -= 5;
-        } else if (input_state === 'stop') {
-            shipPosition.x -= 0;
         }
-        
+
+        /* DRAW */
+
         ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, canvas.width, canvas.height) 
 
@@ -38,12 +38,31 @@ function gameloop() {
             }
         }
             
+        if (input_state[" "]) {
+            laserCanon();
+        }
+
+        for (let j = 0; j < laserShots.length; j++) {
+            if (laserShots.length > 1) {
+                ctx.fillStyle = 'yellow';
+                ctx.fillRect(laserShots[j].x + 8.5, laserShots[j].y, 2, 2);
+                laserShots[j].y -= .5;
+            }
+        }
+        
         ctx.fillStyle = "green"
         ctx.fillRect(shipPosition.x, shipPosition.y, 20, 30);
+
+        
 }
 
 
 function init() {
+    let shipPosition = { x: 350, y: 368 };
+    let enemyShips = [];
+    let laserShots = [];
+    let shipPositionX = shipPosition.x;
+    let shipPositionY = shipPosition.y;
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height) 
     gameloop(shipPosition)
@@ -66,6 +85,10 @@ const enemyShip = () => {
     }
 }
 
+const laserCanon = () => {
+    laserShots.push({x: shipPosition.x, y: shipPosition.y, color: 'yellow'})
+}
+
   
 
 const randomCoor = () => {
@@ -74,41 +97,24 @@ const randomCoor = () => {
     return Math.round(decimal) * 15;
 }
 
+
 document.onkeydown = function(e) {
-    input_state = 'start'
-    arrowKeyPressed = e.key;
+    input_state[e.key] = true;
+    console.log(input_state)
 }
 
-document.onkeyup = function() {
-    input_state = 'stop'
+document.onkeyup = function(e) {
+    input_state[e.key] = false;
+    console.log(input_state)
 }
 
 init();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//} else if (event.code === 'Space') {
+    //         laserCanon();
+    //     }
 
 
 
