@@ -3,7 +3,7 @@ let ctx = canvas.getContext("2d");
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-let shipPosition = { x: 350, y: 368 };
+let shipPosition = { x: 340, y: 368 };
 let enemyShips = [];
 let laserShots = [];
 let shipPositionX = shipPosition.x;
@@ -11,7 +11,9 @@ let shipPositionY = shipPosition.y;
 let input_state = {};
 let arrowKeyPressed;
 let laserId = 0;
-
+let enemiesDefeated = 0;
+let score = 0;
+let enemyShipSpeed = .5;
 
 
 function gameloop() {
@@ -22,13 +24,15 @@ function gameloop() {
             shipPosition.x -= 5;
         }
 
+        enemiesDestroyed();
+
         /* DRAW */
 
         ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, canvas.width, canvas.height) 
 
         for (let i = 0; i < enemyShips.length; i++) {
-            enemyShips[i].y += .5;
+            enemyShips[i].y += enemyShipSpeed;
         }
 
         for (let i = 0; i < enemyShips.length; i++) {
@@ -60,10 +64,10 @@ function gameloop() {
 
 function init() {
     let shipPosition = { x: 350, y: 368 };
-    let enemyShips = [];
-    let laserShots = [];
-    let shipPositionX = shipPosition.x;
-    let shipPositionY = shipPosition.y;
+    enemyShips = [];
+    laserShots = [];
+    shipPositionX = shipPosition.x;
+    shipPositionY = shipPosition.y;
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height) 
     gameloop(shipPosition)
@@ -113,13 +117,32 @@ document.onkeyup = function(e) {
     console.log(input_state)
 }
 
-init();
-
 const isMultipleOfThree = num => {
     const div = parseInt(num / 7);
   
     return num === div * 7;
   };
+
+const scoreBoard = () => {
+    let scoreElement = document.getElementById('score')
+    scoreElement.innerHTML = `Score: ${score}`;
+}
+
+let enemiesDestroyed = () => {
+    for (let i = enemyShips.length - 1; i >= 0; i--) {
+        for (let j = laserShots.length - 1; j >= 0; j--) {
+            if (enemyShips[i].x - 15 <= laserShots[j].x && enemyShips[i].x + 15 >= laserShots[j].x && enemyShips[i].y - 15 <= laserShots[j].y && enemyShips[i].y + 15 >= laserShots[j].y) {
+                enemyShips.splice(i, 1);
+                score += 10;
+                scoreBoard();
+            }
+        }
+    }
+}
+
+init();
+
+
 
 
 

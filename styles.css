@@ -3,6 +3,19 @@ body {
     background-color: black;
 }
 
+#scoreCard {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 20px;
+    user-select: none;
+}
+
+#score {
+    color: white;
+}
+
 #boardContainer {
     display: flex;
     justify-content: center;
@@ -13,9 +26,50 @@ body {
 #canvasContainer {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 #canvas {
     border: 2px solid green;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#diffContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#easy {
+    background-color: green;
+    border: none;
+    user-select: none;
+    outline: none;
+    width: 60px;
+    height: 20px;
+    padding: 2px 0 2px 0;
+}
+
+#medium {
+    background-color: yellow;
+    border: none;
+    user-select: none;
+    outline: none;
+    width: 60px;
+    height: 20px;
+    padding: 2px 0 2px 0;
+}
+
+#hard {
+    background-color: red;
+    border: none;
+    user-select:  none;
+    outline: none;
+    width: 60px;
+    height: 20px;
+    padding: 2px 0 2px 0;
+}
+
+#easy, #medium, #hard::hover {
+
 }
