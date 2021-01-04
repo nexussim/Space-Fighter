@@ -5,6 +5,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height)
 let easy = document.getElementById('easy');
 let medium = document.getElementById('medium');
 let hard = document.getElementById('hard');
+let laser = new Audio('laser2.mp3');
 
 let shipPosition = { x: 340, y: 368 };
 let enemyShips = [];
@@ -14,6 +15,7 @@ let laserId = 0;
 let score = 0;
 let enemyShipSpeed = .5;
 let difficulty = 15;
+let keyPressed;
 
 
 function gameloop() {
@@ -48,6 +50,9 @@ function gameloop() {
                 ctx.fillStyle = 'yellow';
                 ctx.fillRect(laserShots[j].x + 8.5, laserShots[j].y, 2, 2);
                 laserShots[j].y -= 7;
+            }
+            if (keyPressed === 1) {
+                laser.play();
             }
         }
 
@@ -158,14 +163,14 @@ const gameDifficulty = (e) => {
 document.onkeydown = function(e) {
 
     input_state[e.key] = true;
-    console.log(input_state)
+    keyPressed = 1;
 
 }
 
 document.onkeyup = function(e) {
 
     input_state[e.key] = false;
-    console.log(input_state)
+    keyPressed = 0;
 
 }
 
@@ -183,6 +188,13 @@ const isMultipleOfThree = num => {
     return num === div * 7;
 
   };
+
+//   document.addEventListener("keydown", event => {
+//     if (event.code === "Space") {
+//         laser.play();
+//     }
+    
+//   });
 
 init();
 
