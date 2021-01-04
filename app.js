@@ -203,7 +203,7 @@ music.addEventListener("click", event => {
     if (musicPlaying === 0) {
         retroPlatforming.play(); 
         musicPlaying++;
-    } else {
+    } else if (musicPlaying > 0) {
         retroPlatforming.pause();
         musicPlaying = 0;
     }
