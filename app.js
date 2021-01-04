@@ -6,11 +6,13 @@ let easy = document.getElementById('easy');
 let medium = document.getElementById('medium');
 let hard = document.getElementById('hard');
 let music = document.getElementById('music');
+let musicChangeButton = document.getElementById('musicChangeButton');
 let laser = new Audio('audio/laser2.mp3');
 let playerExplosion = new Audio('audio/battleExplosion.mp3');
 let enemyExplosion = new Audio('audio/enemyExplosion.mp3');
 let retroPlatforming = new Audio('audio/retroPlatforming.mp3');
-
+let retroFunk = new Audio('audio/retroFunk.mp3');
+let musicChoice = retroPlatforming;
 
 let shipPosition = { x: 340, y: 368 };
 let enemyShips = [];
@@ -83,7 +85,7 @@ function gameloop() {
 
 function init() {
 
-    shipPosition = { x: 350, y: 368 };
+    shipPosition = { x: 340, y: 368 };
     enemyShips = [];
     laserShots = [];
     ctx.fillStyle = 'black';
@@ -200,15 +202,33 @@ const isMultipleOfThree = num => {
   };
 
 music.addEventListener("click", event => {
+    
+    playMusic();
+
+});
+
+const playMusic = () => {
     if (musicPlaying === 0) {
-        retroPlatforming.play(); 
+        musicChoice.play(); 
         musicPlaying++;
     } else if (musicPlaying > 0) {
-        retroPlatforming.pause();
+        musicChoice.pause();
         musicPlaying = 0;
     }
-       
-    
+}
+
+musicChangeButton.addEventListener("click", event => {
+    musicChoice.pause();
+    if (musicChoice.duration === 130.928875) {
+        musicChoice = retroFunk;
+    } else if ((musicChoice.duration === 173.0201)) {
+        musicChoice = retroPlatforming;
+    }
+    playMusic();
+});
+
+musicChoice.addEventListener('ended', function() {
+    musicChoice.play();
 });
 
 init();
