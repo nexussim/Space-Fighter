@@ -5,7 +5,12 @@ ctx.fillRect(0, 0, canvas.width, canvas.height)
 let easy = document.getElementById('easy');
 let medium = document.getElementById('medium');
 let hard = document.getElementById('hard');
-let laser = new Audio('laser2.mp3');
+let music = document.getElementById('music');
+let laser = new Audio('audio/laser2.mp3');
+let playerExplosion = new Audio('audio/battleExplosion.mp3');
+let enemyExplosion = new Audio('audio/enemyExplosion.mp3');
+let retroPlatforming = new Audio('audio/retroPlatforming.mp3');
+
 
 let shipPosition = { x: 340, y: 368 };
 let enemyShips = [];
@@ -16,12 +21,18 @@ let score = 0;
 let enemyShipSpeed = .5;
 let difficulty = 15;
 let keyPressed;
+let explosionSounds = 0;
+let musicPlaying = 0;
 
 
 function gameloop() {
     requestAnimationFrame(gameloop); 
 
         if (playerHit()) {
+            if (explosionSounds === 0) {
+                playerExplosion.play();
+                explosionSounds++
+            }
             gameOver();
             return;
         }
@@ -38,6 +49,7 @@ function gameloop() {
             
         if (input_state[" "]) {
             laserCannon();
+            laser.play();
         }
 
         /* DRAW */
@@ -49,10 +61,7 @@ function gameloop() {
             if (laserShots.length > 1 && isMultipleOfThree(laserShots[j].id)) {
                 ctx.fillStyle = 'yellow';
                 ctx.fillRect(laserShots[j].x + 8.5, laserShots[j].y, 2, 2);
-                laserShots[j].y -= 7;
-            }
-            if (keyPressed === 1) {
-                laser.play();
+                laserShots[j].y -= 11 ;
             }
         }
 
@@ -65,7 +74,7 @@ function gameloop() {
             }
         }
         
-        ctx.fillStyle = "green"
+        ctx.fillStyle = 'green';
         ctx.fillRect(shipPosition.x, shipPosition.y, 20, 30);
 
         enemiesDestroyed();
@@ -123,6 +132,7 @@ let enemiesDestroyed = () => {
             if (enemyShips[i].x - difficulty <= laserShots[j].x && enemyShips[i].x + difficulty >= laserShots[j].x && enemyShips[i].y - difficulty <= laserShots[j].y && enemyShips[i].y + difficulty >= laserShots[j].y) {
                 enemyShips.splice(i, 1);
                 score += 10;
+                enemyExplosion.play();
             }
         }
     }
@@ -189,12 +199,17 @@ const isMultipleOfThree = num => {
 
   };
 
-//   document.addEventListener("keydown", event => {
-//     if (event.code === "Space") {
-//         laser.play();
-//     }
+music.addEventListener("click", event => {
+    if (musicPlaying === 0) {
+        retroPlatforming.play(); 
+        musicPlaying++;
+    } else {
+        retroPlatforming.pause();
+        musicPlaying = 0;
+    }
+       
     
-//   });
+});
 
 init();
 

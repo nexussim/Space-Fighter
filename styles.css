@@ -13,7 +13,10 @@ body {
 }
 
 #score {
-    color: white;
+    color: rgb(233, 113, 113);
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
 #boardContainer {
@@ -70,12 +73,46 @@ body {
     padding: 2px 0 2px 0;
 }
 
-#easy:hover, #medium:hover, #hard:hover {
+#music {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+}
+
+#musicButton {
+    background-image: linear-gradient(red, yellow);
+    border: none;
+    user-select:  none;
+    outline: none;
+    width: 60px;
+    height: 20px;
+    padding: 2px 0 2px 0;
+}
+
+#easy:hover, #medium:hover, #hard:hover, #musicButton:hover {
     width: 63px;
     height: 23px;
 }
 
-#easy:active, #medium:active, #hard:active {
+#easy:active, #medium:active, #hard:active, #musicButton:active {
     width: 60px;
     height: 20px;
+}
+
+@-webkit-keyframes glow {
+from {
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+to {
+  text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+}
+}
+
+#credits {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 8px;
+    color: white;
 }
