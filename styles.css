@@ -70,6 +70,12 @@ body {
     padding: 2px 0 2px 0;
 }
 
-#easy, #medium, #hard::hover {
+#easy:hover, #medium:hover, #hard:hover {
+    width: 63px;
+    height: 23px;
+}
 
+#easy:active, #medium:active, #hard:active {
+    width: 60px;
+    height: 20px;
 }
