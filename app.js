@@ -9,8 +9,6 @@ let hard = document.getElementById('hard');
 let shipPosition = { x: 340, y: 368 };
 let enemyShips = [];
 let laserShots = [];
-let shipPositionX = shipPosition.x;
-let shipPositionY = shipPosition.y;
 let input_state = {};
 let laserId = 0;
 let score = 0;
@@ -58,7 +56,7 @@ function gameloop() {
             ctx.fillRect(enemyShips[i].x, enemyShips[i].y, 10, 20) 
             if (enemyShips[i].y === canvas.height + 5) {
                 enemyShips.splice(i, 1);
-                score = score - 10;
+                score -= 10;
             }
         }
         
@@ -71,11 +69,9 @@ function gameloop() {
 
 function init() {
 
-    let shipPosition = { x: 350, y: 368 };
+    shipPosition = { x: 350, y: 368 };
     enemyShips = [];
     laserShots = [];
-    shipPositionX = shipPosition.x;
-    shipPositionY = shipPosition.y;
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height) 
     gameloop(shipPosition)
@@ -122,7 +118,6 @@ let enemiesDestroyed = () => {
             if (enemyShips[i].x - difficulty <= laserShots[j].x && enemyShips[i].x + difficulty >= laserShots[j].x && enemyShips[i].y - difficulty <= laserShots[j].y && enemyShips[i].y + difficulty >= laserShots[j].y) {
                 enemyShips.splice(i, 1);
                 score += 10;
-                scoreBoard();
             }
         }
     }
