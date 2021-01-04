@@ -58,8 +58,7 @@ function gameloop() {
             ctx.fillRect(enemyShips[i].x, enemyShips[i].y, 10, 20) 
             if (enemyShips[i].y === canvas.height + 5) {
                 enemyShips.splice(i, 1);
-                score -= 10;
-                
+                score = score - 10;
             }
         }
         
