@@ -124,12 +124,12 @@ const enemyShip = () => {
         }
     }
     if (!noRepeats && enemyShips.length < 15) {
-        enemyShips.push({x: xCoor, y: 5, color: 'red'});
+        enemyShips.push({x: xCoor, y: 0, color: 'red'});
     }
 }
 
 let enemiesDestroyed = () => {
-    for (let i = enemyShips.length - 1; i >= 0; i--) {
+    for (let i = enemyShips.length - 2; i >= 0; i--) {
         for (let j = laserShots.length - 1; j >= 0; j--) {
             if (enemyShips[i].x - difficulty <= laserShots[j].x && enemyShips[i].x + difficulty >= laserShots[j].x && enemyShips[i].y - difficulty <= laserShots[j].y && enemyShips[i].y + difficulty >= laserShots[j].y) {
                 enemyShips.splice(i, 1);
@@ -228,8 +228,9 @@ musicChangeButton.addEventListener("click", event => {
 });
 
 musicChoice.addEventListener('ended', function() {
-    musicChoice.play();
-});
+    this.currentTime = 0;
+    this.play();
+}, false);
 
 init();
 
