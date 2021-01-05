@@ -39,9 +39,9 @@ function gameloop() {
             return;
         }
 
-        if (input_state.ArrowRight && shipPosition.x !== canvas.width - 20) {
+        if (input_state.ArrowRight && shipPosition.x !== canvas.width - 35) {
             shipPosition.x += 5;
-        } else if (input_state.ArrowLeft && shipPosition.x !== 0) {
+        } else if (input_state.ArrowLeft && shipPosition.x !== 15) {
             shipPosition.x -= 5;
         }
 
@@ -76,6 +76,44 @@ function gameloop() {
             }
         }
         
+        /* TOP LEFT */
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.moveTo(shipPosition.x - 10, shipPosition.y);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y - 20);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y);
+        ctx.fill();
+        /* MIDDLE LEFT */
+        ctx.beginPath();
+        ctx.moveTo(shipPosition.x - 10, shipPosition.y + 10);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y - 10);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y + 10);
+        ctx.fill();
+        /* BOTTOM LEFT */
+        ctx.beginPath();
+        ctx.moveTo(shipPosition.x - 15, shipPosition.y + 30);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y + 15);
+        ctx.lineTo(shipPosition.x + 5, shipPosition.y + 30);
+        ctx.fill();
+        /* TOP RIGHT */
+        ctx.beginPath();
+        ctx.moveTo(shipPosition.x + 30, shipPosition.y + 10);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y - 10);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y + 10);
+        ctx.fill();
+        /* MIDDLE RIGHT */       
+        ctx.beginPath();
+        ctx.moveTo(shipPosition.x + 30, shipPosition.y);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y - 20);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y);
+        ctx.fill();
+        /* BOTTOM RIGHT */
+        ctx.beginPath();
+        ctx.moveTo(shipPosition.x + 35, shipPosition.y + 30);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y + 15);
+        ctx.lineTo(shipPosition.x + 15, shipPosition.y + 30);
+        ctx.fill();
+
         ctx.fillStyle = 'green';
         ctx.fillRect(shipPosition.x, shipPosition.y, 20, 30);
 
@@ -104,7 +142,7 @@ const scoreBoard = () => {
 const playerHit = () => {
 
     for (let i = enemyShips.length - 1; i >= 0; i--) { 
-        if (enemyShips[i].x - 10 <= shipPosition.x && enemyShips[i].x + 10 >= shipPosition.x && enemyShips[i].y - 10 <= shipPosition.y && enemyShips[i].y + 10 >= shipPosition.y) {
+        if (enemyShips[i].x - 20 <= shipPosition.x && enemyShips[i].x + 15 >= shipPosition.x && enemyShips[i].y - 20 <= shipPosition.y && enemyShips[i].y + 20 >= shipPosition.y) {
             return true;
         }
     }
@@ -200,7 +238,7 @@ document.onkeyup = function(e) {
 
 const randomCoor = () => {
 
-    let num = Math.floor(Math.random() * Math.floor(680));
+    let num = Math.random() * (680 - 20) + 40;
     let decimal = num / 15;
     return Math.round(decimal) * 15;
 
@@ -242,7 +280,7 @@ musicChangeButton.addEventListener("click", event => {
 });
 
 musicChoice.addEventListener('ended', function() {
-    
+
     this.currentTime = 0;
     this.play();
 }, false);
