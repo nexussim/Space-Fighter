@@ -102,6 +102,7 @@ const scoreBoard = () => {
 }
 
 const playerHit = () => {
+
     for (let i = enemyShips.length - 1; i >= 0; i--) { 
         if (enemyShips[i].x - 10 <= shipPosition.x && enemyShips[i].x + 10 >= shipPosition.x && enemyShips[i].y - 10 <= shipPosition.y && enemyShips[i].y + 10 >= shipPosition.y) {
             return true;
@@ -116,6 +117,7 @@ setInterval(function() {
 }, 1000)
 
 const enemyShip = () => {
+
     let noRepeats = false;
     let xCoor = randomCoor();
     for (let i = 0; i < enemyShips.length; i++) {
@@ -129,6 +131,7 @@ const enemyShip = () => {
 }
 
 let enemiesDestroyed = () => {
+
     for (let i = enemyShips.length - 2; i >= 0; i--) {
         for (let j = laserShots.length - 1; j >= 0; j--) {
             if (enemyShips[i].x - difficulty <= laserShots[j].x && enemyShips[i].x + difficulty >= laserShots[j].x && enemyShips[i].y - difficulty <= laserShots[j].y && enemyShips[i].y + difficulty >= laserShots[j].y) {
@@ -140,11 +143,20 @@ let enemiesDestroyed = () => {
     }
 }
 
+setInterval(function () {
+
+    for (let i = 0; i < laserShots.length; i++) {
+        if (laserShots[i].y < 0) {
+            laserShots.splice(laserShots[i], 1);
+        }
+    }
+}, 100) 
+
 const laserCannon = () => {
 
     laserShots.push({x: shipPosition.x, y: shipPosition.y, color: 'yellow', id: laserId})
     laserId++;
-    if (laserShots.length > 57) {
+    if (laserShots.length > 50) {
         laserShots.splice(0, 1);
     }
 }
@@ -208,6 +220,7 @@ music.addEventListener("click", event => {
 });
 
 const playMusic = () => {
+
     if (musicPlaying === 0) {
         musicChoice.play(); 
         musicPlaying++;
@@ -218,6 +231,7 @@ const playMusic = () => {
 }
 
 musicChangeButton.addEventListener("click", event => {
+
     musicChoice.pause();
     if (musicChoice.duration === 130.928875) {
         musicChoice = retroFunk;
@@ -228,6 +242,7 @@ musicChangeButton.addEventListener("click", event => {
 });
 
 musicChoice.addEventListener('ended', function() {
+    
     this.currentTime = 0;
     this.play();
 }, false);
