@@ -12,7 +12,23 @@ body {
     user-select: none;
 }
 
+#hiScore {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 20px;
+    user-select: none;
+}
+
 #score {
+    color: rgb(233, 113, 113);
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+#hiScoreCard {
     color: rgb(233, 113, 113);
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;

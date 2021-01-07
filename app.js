@@ -75,7 +75,7 @@ function gameloop() {
                 score -= 10;
             }
         }
-        
+        /* PLAYER SHIP */
         /* TOP LEFT */
         ctx.beginPath();
         ctx.fillStyle = 'green';
@@ -134,8 +134,12 @@ function init() {
 
 const scoreBoard = () => {
 
-    let scoreElement = document.getElementById('score')
+    let scoreElement = document.getElementById('score');
+    let hiScore = document.getElementById('hiScore');
+    myHiScore = localStorage.getItem('hiScore')
     scoreElement.innerHTML = `Score: ${score}`;
+    hiScore.innerHTML = `Hi Score: ${myHiScore}`;
+    storeScore();
 
 }
 
@@ -238,7 +242,7 @@ document.onkeyup = function(e) {
 
 const randomCoor = () => {
 
-    let num = Math.random() * (680 - 20) + 40;
+    let num = Math.random() * (670 - 30) + 40;
     let decimal = num / 15;
     return Math.round(decimal) * 15;
 
@@ -284,6 +288,14 @@ musicChoice.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
 }, false);
+
+const storeScore = () => {
+    let hiScore = localStorage.getItem('hiScore');
+    if (score > hiScore) {
+        localStorage.setItem("hiScore", score)
+    }
+    
+}
 
 init();
 
