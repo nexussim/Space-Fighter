@@ -266,7 +266,7 @@ const playMusic = () => {
     if (musicPlaying === 0) {
         musicChoice.play(); 
         musicPlaying++;
-    } else if (musicPlaying > 0) {
+    } else if (musicPlaying === 1) {
         musicChoice.pause();
         musicPlaying = 0;
     }
