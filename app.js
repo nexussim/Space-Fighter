@@ -6,6 +6,7 @@ let easy = document.getElementById('easy');
 let medium = document.getElementById('medium');
 let hard = document.getElementById('hard');
 let music = document.getElementById('music');
+let musicButton = document.getElementById('musicButton');
 let musicChangeButton = document.getElementById('musicChangeButton');
 let laser = new Audio('audio/laser2.mp3');
 let playerExplosion = new Audio('audio/battleExplosion.mp3');
@@ -258,6 +259,7 @@ const isMultipleOfThree = num => {
 music.addEventListener("click", event => {
     
     playMusic();
+    musicButton.blur();
 
 });
 
@@ -277,8 +279,10 @@ musicChangeButton.addEventListener("click", event => {
     musicChoice.pause();
     if (musicChoice.duration === 130.928875) {
         musicChoice = retroFunk;
+        musicChangeButton.blur();
     } else if ((musicChoice.duration === 173.0201)) {
         musicChoice = retroPlatforming;
+        musicChangeButton.blur();
     }
     playMusic();
 });
